@@ -88,23 +88,18 @@ function handleReplyClick(replyId){
 function handleDeleteClick(tweetId){
     const localStorageTweets = JSON.parse(localStorage.getItem("newTweets"))
     deleteTweet(tweetsData,tweetId)
-    const updatedStorage = deleteStorageTweet(localStorageTweets,tweetId)
+    const updatedStorage = deleteTweet(localStorageTweets,tweetId)
     localStorage.setItem("newTweets",JSON.stringify(updatedStorage))
     render()
-}
-function deleteStorageTweet(tweets,tweetId){
-    const updatedTweetArray = tweets.filter(function(tweet){
-        return tweet.uuid !== tweetId
-    })
-    return updatedTweetArray
 }
 
 function deleteTweet(tweets,tweetId){
    const targetTweetObj = tweets.filter(function(tweet){
         return tweet.uuid === tweetId
     })[0]
-    const index = tweetsData.indexOf(targetTweetObj)
-    tweetsData.splice(index,1)
+    const index = tweets.indexOf(targetTweetObj)
+    tweets.splice(index,1)
+    return tweets
 }
 
 function handleTweetBtnClick(){
